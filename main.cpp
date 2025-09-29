@@ -1,37 +1,77 @@
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
+#include <windows.h>
+#include <conio.h>
 
 using namespace std;
 
-int main()
-{
-	int Ball[53] = {};
-	srand((unsigned)time(NULL));
+bool bIsRunning = true;
 
-	for (int i = 1; i <= 52; i++)
+int KeyCode;
+int PlayerX = 1;
+int PlayerY = 1;
+int MonsterX = 1;
+int MonsterY = 1;
+char PlayerShape = 'P';
+char MonsterShape = 'M';
+
+void Input()
+{
+	KeyCode = _getch();
+}
+
+void Process()
+{
+	if (KeyCode == 'w')
 	{
-		Ball[i] = i;
+		PlayerY--;
+	}
+
+	else if (KeyCode == 's')
+	{
+		PlayerY++;
+	}
+
+	else if (KeyCode == 'a')
+	{
+		PlayerX--;
+	}
+
+	else if (KeyCode == 'd')
+	{
+		PlayerX++;
+	}
+
+	else if (KeyCode == 'q')
+	{
+		bIsRunning = false;
 	}
 	
-	for (int i = 1; i <= 52; i++)
-	{	
-		
-		while (true)
-		{
-			int ran = rand() % 52 + 1;
-			if (Ball[ran] != 0)
-			{
-				cout << Ball[ran] << endl;
-				Ball[ran] = 0;
-				break;
-			}
-			else if (Ball[ran] = 0)
-			{
-				continue;
-			}
-		}
+}
+
+void Pgotoxy(int PlayerX, int PlayerY)
+{
+	system("cls");
+	COORD Ppos = { PlayerX, PlayerY };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Ppos);
+	cout << PlayerShape << endl;
+}
+
+void Mgotoxy(int MonsterX, int MonsterY)
+{
+	COORD Mpos = { 5, 3 };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Mpos);
+	cout << MonsterShape << endl;
+}
+
+int main()
+{
+	
+	while (bIsRunning)
+	{
+		Input();
+		Process();
+		Pgotoxy(PlayerX, PlayerY);
+		Mgotoxy(MonsterX, MonsterY);
 	}
 
 	return 0;
