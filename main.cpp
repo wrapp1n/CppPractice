@@ -48,20 +48,18 @@ void Process()
 	
 }
 
-void Pgotoxy(int PlayerX, int PlayerY)
+void Render(int PlayerX, int PlayerY, int MonsterX, int MonsterY)
 {
 	system("cls");
 	COORD Ppos = { PlayerX, PlayerY };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Ppos);
-	cout << PlayerShape << endl;
-}
+	cout << PlayerShape ;
 
-void Mgotoxy(int MonsterX, int MonsterY)
-{
 	COORD Mpos = { 5, 3 };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Mpos);
 	cout << MonsterShape << endl;
 }
+
 
 int main()
 {
@@ -70,8 +68,7 @@ int main()
 	{
 		Input();
 		Process();
-		Pgotoxy(PlayerX, PlayerY);
-		Mgotoxy(MonsterX, MonsterY);
+		Render(PlayerX, PlayerY, MonsterX, MonsterY);
 	}
 
 	return 0;
